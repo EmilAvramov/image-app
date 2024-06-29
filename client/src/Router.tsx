@@ -4,6 +4,8 @@ import { Home } from './pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { CreateImage } from './pages/CreateImage'
+import { EditImage } from './pages/EditImage'
+import { ViewImage } from './pages/ViewImage'
 
 const Layout = () => (
   <>
@@ -24,6 +26,14 @@ export const router = createBrowserRouter([
       {
         path: '/create',
         element: <CreateImage />,
+      },
+      {
+        path: '/edit',
+        element: <EditImage />,
+      },
+      {
+        path: '/view',
+        element: <ViewImage />,
       },
     ],
   },
