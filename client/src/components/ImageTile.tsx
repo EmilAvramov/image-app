@@ -5,7 +5,7 @@ interface ImageTileProps {
   image: Image
 }
 
-export const ImageTile: React.FC<ImageTileProps> = ({ image }) => {
+export const ImageTile: React.FC<ImageTileProps> = ({ image }): JSX.Element => {
   return (
     <div>
       <div>{image.description}</div>
