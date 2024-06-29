@@ -1,0 +1,66 @@
+services:
+  react:
+    container_name: react-client
+    hostname: localhost
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/usr/src/client
+    command: npm run start
+    networks:
+      - react
+
+  express:
+    container_name: ts-node-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 8080:8080
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydatabase
+      POSTGRES_PORT: 5432
+      SERVER_PORT: 8080
+    volumes:
+      - ./server:/usr/src/server
+    command: npm run dev
+    networks:
+      - express
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    container_name: pg-db
+    image: postgres
+    restart: always
+    user: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - express
+
+networks:
+  react:
+  express:
+volumes:
+  db-data:
