@@ -2,12 +2,7 @@ import React from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
-
-interface ImageForm {
-  title: string
-  description: string
-  url: string
-}
+import type { ImageFormValues } from '../types/helpers'
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Field is required'),
@@ -15,24 +10,33 @@ const validationSchema = Yup.object().shape({
   url: Yup.string().required('Field is required'),
 })
 
-export const ImageForm: React.FC = () => {
+interface ImageFormProps {
+  submitFunction: (data: ImageFormValues) => void
+  defaultValues?: {
+    title?: string
+    description?: string
+    url?: string
+  }
+}
+
+export const ImageForm: React.FC<ImageFormProps> = ({ submitFunction, defaultValues }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ImageForm>({
+  } = useForm<ImageFormValues>({
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
     reValidateMode: 'onChange',
+    defaultValues: {
+      title: defaultValues?.title || '',
+      description: defaultValues?.description || '',
+      url: defaultValues?.url || '',
+    },
   })
-
-  const submitForm = (data: ImageForm) => {
-    console.log(data)
-  }
-
   return (
     <main>
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form onSubmit={handleSubmit(submitFunction)}>
         <input {...register('title')} type="text" placeholder="Image Title" />
         {errors.title && <p>{errors.title.message}</p>}
         <input {...register('description')} type="text" placeholder="Image Description" />
