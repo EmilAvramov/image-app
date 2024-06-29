@@ -45,7 +45,9 @@ export const modifyImage = async (
 export const deleteImage = async (id: number): Promise<void> => {
   try {
     const imageInDB = await ImageModel.findByPk(id)
-    await ImageModel.destroy({ where: { id } })
+    if (imageInDB) {
+      await ImageModel.destroy({ where: { id } })
+    }
   } catch (err: any) {
     throw new Error(err.message)
   }

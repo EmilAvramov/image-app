@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import type { Request, Response } from 'express'
 import { createImage, deleteImage, getImage, getImages, modifyImage } from '../services/Image'
-import sequelize from '../config/database'
 
 const router = Router()
 
