@@ -28,13 +28,13 @@ export class ImagesAPI {
     return await axios.post<Image>(CONFIGS.URL, payload)
   }
 
-  updateImage = async (payload: UpdateImagePayload): Promise<AxiosResponse<Image>> => {
-    return await axios.patch<Image>(CONFIGS.URL, payload)
+  updateImage = async (payload: UpdateImagePayload): Promise<AxiosResponse<Image> | undefined> => {
+    if (payload.id && payload.data) {
+      return await axios.patch<Image>(`${CONFIGS.URL}/${payload.id}`, payload.data)
+    }
   }
 
   deleteImage = async (payload: DeleteImagePayload): Promise<AxiosResponse<void>> => {
-    return await axios.delete(CONFIGS.URL, {
-      params: payload,
-    })
+    return await axios.delete(`${CONFIGS.URL}/${payload.id}`)
   }
 }

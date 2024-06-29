@@ -10,3 +10,11 @@ export interface ImageFormValues {
   description: string
   url: string
 }
+
+export interface SearchFormValues {
+  query: number
+}
+
+export type LocationState = {
+  id: number
+}

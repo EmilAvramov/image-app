@@ -6,7 +6,7 @@ export interface Image {
 }
 
 export interface GetImagePayload {
-  id: string
+  id: number
 }
 
 export interface GetImagesResponse {
@@ -17,11 +17,14 @@ export interface GetImagesResponse {
 export interface CreateImagePayload extends Omit<Image, 'id'> {}
 
 export interface UpdateImagePayload {
-  title?: string
-  description?: string
-  url?: string
+  id: number
+  data: {
+    title?: string
+    description?: string
+    url?: string
+  }
 }
 
 export interface DeleteImagePayload {
-  id: string
+  id: number
 }
