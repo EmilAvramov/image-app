@@ -17,9 +17,14 @@ interface ImageFormProps {
     description?: string
     url?: string
   }
+  buttonText: string
 }
 
-export const ImageForm: React.FC<ImageFormProps> = ({ submitFunction, defaultValues }) => {
+export const ImageForm: React.FC<ImageFormProps> = ({
+  submitFunction,
+  defaultValues,
+  buttonText,
+}) => {
   const {
     register,
     handleSubmit,
@@ -43,7 +48,7 @@ export const ImageForm: React.FC<ImageFormProps> = ({ submitFunction, defaultVal
         {errors.description && <p>{errors.description.message}</p>}
         <input {...register('url')} type="text" placeholder="Image URL" />
         {errors.url && <p>{errors.url.message}</p>}
-        <button>Add image</button>
+        <button>{buttonText}</button>
       </form>
     </main>
   )
