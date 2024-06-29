@@ -1,24 +1,19 @@
-import { Op } from 'sequelize'
 import { Image, ImageModel } from '../models/Image'
 
-export const getImages = async (id?: number): Promise<Image[]> => {
+export const getImage = async (id: number): Promise<Image | null> => {
   try {
     if (id) {
-      return await ImageModel.findAll({
-        include: [
-          {
-            model: ImageModel,
-            where: { id },
-          },
-        ],
-      })
+      return await ImageModel.findByPk(id)
     }
+    return null
+  } catch (err: any) {
+    throw new Error(err.message)
+  }
+}
+
+export const getImages = async (): Promise<Image[]> => {
+  try {
     return await ImageModel.findAll({
-      include: [
-        {
-          model: ImageModel,
-        },
-      ],
       order: [['id', 'DESC']],
     })
   } catch (err: any) {

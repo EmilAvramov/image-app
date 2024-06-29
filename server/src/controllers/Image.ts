@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import type { Request, Response } from 'express'
-import { createImage, deleteImage, getImages, modifyImage } from '../services/Image'
+import { createImage, deleteImage, getImage, getImages, modifyImage } from '../services/Image'
+import sequelize from '../config/database'
 
 const router = Router()
 
@@ -9,7 +10,7 @@ router.get('/', async (req: Request, res: Response) => {
     const id = Number(req.params.id)
 
     if (id) {
-      const image = await getImages(id)
+      const image = await getImage(id)
       res.status(200).json(image)
     }
 
@@ -44,7 +45,7 @@ router.patch('/:id', async (req: Request, res: Response) => {
       req.body.url
     )
     if (modifyImageResponse[0] > 0) {
-      const response = await getImages(id)
+      const response = await getImage(id)
       res.status(200).json(response)
     } else {
       // return an error response
