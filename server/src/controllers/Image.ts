@@ -27,7 +27,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const response = await createImage(req.body.payload)
+    const response = await createImage(req.body)
     res.status(201).json(response)
   } catch (e) {
     res.status(500).json({ message: 'An unexpected error occurred, please try again.' })
