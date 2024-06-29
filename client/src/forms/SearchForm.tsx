@@ -24,7 +24,7 @@ export const SearchForm: React.FC = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (data: SearchFormValues) => {
-    const imageQueryRequest = await api?.getImage({ id: data.query })
+    const imageQueryRequest = await api?.getImage({ id: Number(data.query) })
     if (imageQueryRequest?.status === 200) {
       navigate('/view', { state: { id: imageQueryRequest.data.id } })
     }
@@ -33,7 +33,7 @@ export const SearchForm: React.FC = () => {
   return (
     <main>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('query')} type="number" placeholder="Image Title" />
+        <input {...register('query')} type="text" placeholder="Enter image ID" />
         {errors.query && <p>{errors.query.message}</p>}
         <button>Search by ID</button>
       </form>

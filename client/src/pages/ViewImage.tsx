@@ -1,8 +1,10 @@
+import React from 'react'
+
 import { useLocation } from 'react-router-dom'
 import { ImageTile } from '../components/ImageTile'
-import { LocationState } from '../types/helpers'
+import type { LocationState } from '../types/helpers'
 import { useEffect, useState } from 'react'
-import { Image } from '../types/image'
+import type { Image } from '../types/image'
 import { useImagesAPI } from '../context/useImagesAPI'
 
 export const ViewImage: React.FC = (): JSX.Element => {
@@ -20,7 +22,7 @@ export const ViewImage: React.FC = (): JSX.Element => {
       }
     }
     void getImage()
-  }, [id])
+  }, [id, api])
 
   if (!image) {
     return <></>
