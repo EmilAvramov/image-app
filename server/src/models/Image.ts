@@ -7,7 +7,7 @@ import {
 } from 'sequelize'
 import sequelize from '../config/database'
 
-class Image extends Model<InferAttributes<Image>, InferCreationAttributes<Image>> {
+export class Image extends Model<InferAttributes<Image>, InferCreationAttributes<Image>> {
   declare id: CreationOptional<number>
   declare title: string
   declare description: string
@@ -39,7 +39,6 @@ export const ImageModel = Image.init(
     timestamps: false,
   }
 )
-
 ;(async () => {
   await sequelize.sync()
 })()
