@@ -4,6 +4,7 @@ import type {
   CreateImagePayload,
   DeleteImagePayload,
   GetImagePayload,
+  GetImagesResponse,
   Image,
   UpdateImagePayload,
 } from '../types/image'
@@ -19,8 +20,8 @@ export class ImagesAPI {
     })
   }
 
-  getImages = async (): Promise<AxiosResponse<Image[]>> => {
-    return await axios.get<Image[]>(CONFIGS.URL)
+  getImages = async (): Promise<AxiosResponse<GetImagesResponse>> => {
+    return await axios.get<GetImagesResponse>(CONFIGS.URL)
   }
 
   createImage = async (payload: CreateImagePayload): Promise<AxiosResponse<Image>> => {

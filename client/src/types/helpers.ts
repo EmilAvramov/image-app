@@ -1,6 +1,12 @@
 import type { Image } from './image'
 
 export interface ImageData {
-  images: Image[]
+  data: Image[]
   total: number
+}
+
+export interface ImageFormValues {
+  title: string
+  description: string
+  url: string
 }

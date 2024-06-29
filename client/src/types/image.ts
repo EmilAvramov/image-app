@@ -9,6 +9,11 @@ export interface GetImagePayload {
   id: string
 }
 
+export interface GetImagesResponse {
+  data: Image[]
+  total: number
+}
+
 export interface CreateImagePayload extends Omit<Image, 'id'> {}
 
 export interface UpdateImagePayload {
