@@ -3,6 +3,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
+import { ImageForm } from './pages/ImageForm'
 
 const Layout = () => (
   <>
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/create',
+        element: <ImageForm />,
       },
     ],
   },
